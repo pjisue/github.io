@@ -2,12 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Jisue Park portfolio</title>
+    <title>Jisue Park portfolio</title>\
+    
+    <!-- 1. Inter Tight 폰트 불러오기 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- p5.js 라이브러리 연결 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+
+  <!-- dotsketch.js 연결 -->
+  <script src="dotsketch.js" defer></script>
+  <style>
+    body {
+         margin: 0;
+         font-family: 'Inter Tight', sans-serif;
+         color: white;
+         background-color: black;
+         overflow: hidden;
+        }
+
+        #info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 12px 16px;
+            border-radius: 8px;
+        }
+  </style>
 </head>
 <body>
-    <h1>Jisue Park's Portfolio</h1>
-    <p>
-        Hello my name is Jisue Park.
-    </p>
+    <div id="info">
+        <h1>Jisue Park's Portfolio</h1>
+        <p>Hello, my name is Jisue Park.<br>
+        This is a creative coding experiment using p5.js ✨</p>
 </body>
 </html>
