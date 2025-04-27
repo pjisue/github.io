@@ -13,32 +13,35 @@
   <!-- dotsketch.js 연결 -->
   <script src="dotsketch.js" defer></script>
   <style>
-    body {
-         margin: 0;
-         font-family: 'Inter Tight', sans-serif;
-         color: white;
-         background-color: black;
-         overflow: hidden;
-        }
-
-        #info {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 10;
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 12px 16px;
-            border-radius: 8px;
-        }
-        #links {
-    position: absolute;
-    top: 120px; /* Adjust down to go below your intro text */
-    left: 20px;
-    z-index: 10; /* Bring it on top of canvas */
-    color: white; /* So links are visible on black */
-    font-size: 16px;
-  }
-        
+    #info {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 10;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 12px 16px;
+      border-radius: 8px;
+    }
+  
+    #links {
+      position: absolute;
+      top: 180px; /* move it DOWN under the info box */
+      left: 20px;
+      z-index: 11; /* higher than canvas */
+      font-size: 16px;
+      color: white;
+    }
+  
+    #links a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+    }
+  
+    #links a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -49,7 +52,7 @@
     </div>
   
     <div id="links">
-      <a href="sort-boxes.html">Boxes Playground</a><br>
+      <a href="sort-boxes.html">Boxes Playground</a>
       <a href="chat-simulation.html">Chat Simulation</a>
     </div>
   </body>
