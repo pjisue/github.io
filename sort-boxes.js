@@ -19,27 +19,30 @@ function draw() {
 }
 
 function mousePressed() {
-    // Check for border drag first
     activeBox = null;
-    for (let i = boxes.length - 1; i >= 0; i--) {
+    let clickedBox = false;
+    // Check for border drag first
+     for (let i = boxes.length - 1; i >= 0; i--) {
       if (boxes[i].overBorder(mouseX, mouseY)) {
         activeBox = boxes[i];
         activeBox.startDrag(mouseX, mouseY);
+        clickedBox = true;
         return;
       }
     }
   
-    // If clicked inside a box, select it for typing
+    // Check for box selection
     for (let box of boxes) {
       if (box.contains(mouseX, mouseY)) {
         box.selected = true;
+        clickedBox = true;
       } else {
         box.selected = false;
       }
     }
   
-    // If clicked on empty space, create new box
-    if (boxes.length < maxBoxes) {
+    // If clicked empty space, create new box
+    if (!clickedBox && boxes.length < maxBoxes) {
       let b = new Box(mouseX, mouseY);
       boxes.push(b);
     }
@@ -66,22 +69,12 @@ function keyPressed() {
 }
 
 function keyTyped() {
-  if (activeBox && activeBox.selected) {
-    if (key.length === 1 && activeBox.text.length < 15) {
-      activeBox.text += key;
+    for (let box of boxes) {
+      if (box.selected && key.length === 1 && box.text.length < 15) {
+        box.text += key;
+      }
     }
   }
-}
-
-function doubleClicked() {
-  for (let box of boxes) {
-    if (box.contains(mouseX, mouseY)) {
-      box.selected = true;
-    } else {
-      box.selected = false;
-    }
-  }
-}
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
@@ -125,7 +118,7 @@ class Box {
 
     fill(0);
     noStroke();
-    textSize(16);
+    textSize(12);
     text(this.text, 0, 0);
     pop();
   }
@@ -136,7 +129,7 @@ class Box {
   }
 
   overBorder(px, py) {
-    let buffer = 12;
+    let buffer = 15;
     return (
       abs(px - (this.x - this.w / 2)) < buffer ||
       abs(px - (this.x + this.w / 2)) < buffer ||
