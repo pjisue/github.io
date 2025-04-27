@@ -19,22 +19,31 @@ function draw() {
 }
 
 function mousePressed() {
-  // First, check if user clicked on a box border for dragging
-  activeBox = null;
-  for (let i = boxes.length - 1; i >= 0; i--) {
-    if (boxes[i].overBorder(mouseX, mouseY)) {
-      activeBox = boxes[i];
-      activeBox.startDrag(mouseX, mouseY);
-      return;
+    // Check for border drag first
+    activeBox = null;
+    for (let i = boxes.length - 1; i >= 0; i--) {
+      if (boxes[i].overBorder(mouseX, mouseY)) {
+        activeBox = boxes[i];
+        activeBox.startDrag(mouseX, mouseY);
+        return;
+      }
+    }
+  
+    // If clicked inside a box, select it for typing
+    for (let box of boxes) {
+      if (box.contains(mouseX, mouseY)) {
+        box.selected = true;
+      } else {
+        box.selected = false;
+      }
+    }
+  
+    // If clicked on empty space, create new box
+    if (boxes.length < maxBoxes) {
+      let b = new Box(mouseX, mouseY);
+      boxes.push(b);
     }
   }
-
-  // If not dragging border and under max limit, create new box
-  if (boxes.length < maxBoxes) {
-    let b = new Box(mouseX, mouseY);
-    boxes.push(b);
-  }
-}
 
 function mouseReleased() {
   if (activeBox) {
@@ -110,7 +119,7 @@ class Box {
     scale(this.scale);
     noFill();
     stroke(0);
-    strokeWeight(1);
+    strokeWeight(this.selected ? 2 : 1); // Thicker border if selected
     rectMode(CENTER);
     rect(0, 0, this.w, this.h);
 
@@ -127,7 +136,7 @@ class Box {
   }
 
   overBorder(px, py) {
-    let buffer = 5;
+    let buffer = 12;
     return (
       abs(px - (this.x - this.w / 2)) < buffer ||
       abs(px - (this.x + this.w / 2)) < buffer ||
