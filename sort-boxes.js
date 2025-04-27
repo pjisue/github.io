@@ -24,33 +24,26 @@ function draw() {
 }
 
 function drawButtons() {
-  noFill();
-  stroke(0);
-  strokeWeight(1);
-
-  // '-' Button (Delete selected)
-// Corrected '-' Button Drawing
-line(
-  width - buttonMargin - buttonSize * 2 - 8 + 6, 
-  buttonMargin + buttonSize / 2,
-  width - buttonMargin - buttonSize * 2 - 8 + buttonSize - 6, 
-  buttonMargin + buttonSize / 2
-);
-  // 'X' Button (Clear all)
-  line(width - buttonMargin - buttonSize + 6, buttonMargin + 6, width - buttonMargin - 6, buttonMargin + buttonSize - 6);
-  line(width - buttonMargin - 6, buttonMargin + 6, width - buttonMargin - buttonSize + 6, buttonMargin + buttonSize - 6);
-
-  // Save Button
-noFill();
-stroke(0);
-strokeWeight(1);
-
-// Outer box
-rect(width - buttonMargin - buttonSize, height - buttonMargin - buttonSize, buttonSize, buttonSize);
-
-// Inner box
-rect(width - buttonMargin - buttonSize + buttonSize/4, height - buttonMargin - buttonSize + buttonSize/4, buttonSize/2, buttonSize/2);
-}
+    noFill();
+    stroke(0);
+    strokeWeight(1);
+  
+    // '-' Button (Delete selected) – ONLY line, no box
+    line(
+      width - buttonMargin - buttonSize * 2 - 8 + 6,
+      buttonMargin + buttonSize / 2,
+      width - buttonMargin - buttonSize * 2 - 8 + buttonSize - 6,
+      buttonMargin + buttonSize / 2
+    );
+  
+    // 'X' Button (Clear all) – ONLY two lines, no box
+    line(width - buttonMargin - buttonSize + 6, buttonMargin + 6, width - buttonMargin - 6, buttonMargin + buttonSize - 6);
+    line(width - buttonMargin - 6, buttonMargin + 6, width - buttonMargin - buttonSize + 6, buttonMargin + buttonSize - 6);
+  
+    // Save Button – keep the outer box + inner box (floppy disk icon)
+    rect(width - buttonMargin - buttonSize, height - buttonMargin - buttonSize, buttonSize, buttonSize);
+    rect(width - buttonMargin - buttonSize + buttonSize / 4, height - buttonMargin - buttonSize + buttonSize / 4, buttonSize / 2, buttonSize / 2);
+  }
 
 function mousePressed() {
   activeBox = null;
